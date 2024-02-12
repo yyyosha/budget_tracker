@@ -26,7 +26,7 @@ class TransactionListScreen extends GetView<TransactionListController> {
                   child: Text(
                     "There are is not transactions",
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: AppSizes.fontSizeLarge,
                       fontWeight: FontWeight.w400,
                     ),
                   ),

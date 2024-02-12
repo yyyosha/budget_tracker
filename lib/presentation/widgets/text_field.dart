@@ -81,7 +81,10 @@ class CustomTextFormField extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSizes.paddingSmall),
-            const Text("EUR", style: TextStyle(fontSize: 20.0)),
+            const Text(
+              "EUR",
+              style: TextStyle(fontSize: AppSizes.fontSizeLarge),
+            ),
           ],
         ),
         if (validationError && controller.text.isEmpty)

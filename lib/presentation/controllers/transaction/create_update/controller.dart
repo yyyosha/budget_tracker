@@ -18,6 +18,7 @@ class TransactionCreateUpdateController extends GetxController {
   final amountControllerError = false.obs;
   final type = EnumTransactionType.income.obs;
   final category = TransactionCategory.values.first.obs;
+  final transactionDate = DateTime.now().obs;
   final itemId = "".obs;
   final categories = TransactionCategory.values.obs;
   final Rx<TransactionModel?> item = TransactionModel.createFake().obs;
@@ -65,7 +66,7 @@ class TransactionCreateUpdateController extends GetxController {
         amount: double.parse(amountController.value.text),
         type: type.value,
         category: category.value,
-        createdAt: DateTime.now(),
+        createdAt: transactionDate.value,
       );
       await repository.create(model);
       Get.offAndToNamed(Routes.transactionList);
@@ -80,7 +81,7 @@ class TransactionCreateUpdateController extends GetxController {
         amount: double.parse(amountController.text),
         type: type.value,
         category: category.value,
-        createdAt: item.value!.createdAt,
+        createdAt: transactionDate.value,
       );
       await repository.edit(model);
       Get.offAndToNamed(Routes.transactionList);
@@ -92,6 +93,7 @@ class TransactionCreateUpdateController extends GetxController {
     amountController.text = Parser.doubleToString(item.value!.amount);
     category.value = item.value!.category;
     type.value = item.value!.type;
+    transactionDate.value = item.value!.createdAt;
     if (type.value == EnumTransactionType.income) {
       categories.value = EnumTransactionIncomeCategory.values;
     } else {

@@ -29,7 +29,7 @@ class BtAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Text(
               title,
-              style: const TextStyle(fontSize: 20.0),
+              style: const TextStyle(fontSize: AppSizes.fontSizeLarge),
             ),
             const SizedBox(width: 48.0),
           ],

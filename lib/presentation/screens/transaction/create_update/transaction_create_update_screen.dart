@@ -5,8 +5,10 @@ import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:budget_tracker/presentation/controllers/transaction/create_update/controller.dart';
 import 'package:budget_tracker/presentation/screens/core/app_bar.dart';
 import 'package:budget_tracker/presentation/widgets/text_field.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TransactionCreateUpdateScreen
     extends GetView<TransactionCreateUpdateController> {
@@ -57,7 +59,7 @@ class TransactionCreateUpdateScreen
                                   child: Text(
                                     e.getString,
                                     style: const TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: AppSizes.fontSizeSmall,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -68,7 +70,7 @@ class TransactionCreateUpdateScreen
                         const Text(
                           "Category:",
                           style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: AppSizes.fontSizeSmall,
                           ),
                         ),
                         DropdownButton(
@@ -90,6 +92,30 @@ class TransactionCreateUpdateScreen
                     ),
                   ),
                   const SizedBox(height: AppSizes.paddingMedium),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Date: ${DateFormat.yMMMMd('en_US').format(
+                          controller.transactionDate.value,
+                        )}",
+                        style: const TextStyle(
+                          fontSize: AppSizes.fontSizeSmall,
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: () => _showCalendar(context),
+                        child: const Text("Change Date"),
+                      ),
+                    ],
+                  ),
+                  // CalendarDatePicker2(
+                  //   config: CalendarDatePicker2Config(),
+                  //   value: [
+                  //     DateTime.now(),
+                  //   ],
+                  // ),
+                  const SizedBox(height: AppSizes.paddingMedium),
                   CustomTextFormField(
                     controller: controller.amountController,
                     validationError: controller.amountControllerError.value,
@@ -99,7 +125,7 @@ class TransactionCreateUpdateScreen
                   const SizedBox(height: AppSizes.paddingLarge),
                   OutlinedButton(
                     onPressed: controller.save,
-                    child: const Text("Save"),
+                    child: const Text("Save Transaction"),
                   ),
                 ],
               ),
@@ -108,5 +134,17 @@ class TransactionCreateUpdateScreen
         ),
       ),
     );
+  }
+
+  Future<void> _showCalendar(BuildContext context) async {
+    final dateTime = await showCalendarDatePicker2Dialog(
+      context: context,
+      config: CalendarDatePicker2WithActionButtonsConfig(),
+      dialogSize: const Size(325, 400),
+      value: [controller.transactionDate.value],
+      borderRadius: BorderRadius.circular(AppSizes.radius),
+    );
+    controller.transactionDate.value =
+        dateTime != null ? dateTime[0]! : DateTime.now();
   }
 }

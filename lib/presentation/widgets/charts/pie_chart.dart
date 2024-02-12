@@ -1,3 +1,4 @@
+import 'package:budget_tracker/app/theme/sizes.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class AppPieChart extends StatelessWidget {
               child: Text(
               "You don't have such transactions",
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: AppSizes.fontSizeMedium,
               ),
             ))
           : PieChart(

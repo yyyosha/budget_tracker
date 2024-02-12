@@ -30,7 +30,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                     child: Text(
                       "There are is not transactions",
                       style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize: AppSizes.fontSizeLarge,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -41,7 +41,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                         const Text(
                           "Total",
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: AppSizes.fontSizeMedium,
                           ),
                         ),
                         AppPieChart(
@@ -66,7 +66,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                         const Text(
                           "By Categories",
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: AppSizes.fontSizeMedium,
                           ),
                         ),
                         const SizedBox(height: AppSizes.paddingLarge),
