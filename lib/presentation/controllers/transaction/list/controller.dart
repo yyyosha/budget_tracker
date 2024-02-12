@@ -15,7 +15,7 @@ class TransactionListController extends GetxController {
   Future<void> onInit() async {
     final initialItems = await search();
     transactions.addAll(initialItems);
-    transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    transactions.sort((a, b) => b.date.compareTo(a.date));
     super.onInit();
   }
 
@@ -33,6 +33,6 @@ class TransactionListController extends GetxController {
     final initialItems = await search();
     transactions.clear();
     transactions.addAll(initialItems);
-    transactions.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    transactions.sort((a, b) => b.date.compareTo(a.date));
   }
 }

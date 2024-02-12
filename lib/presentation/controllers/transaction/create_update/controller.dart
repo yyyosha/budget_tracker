@@ -66,7 +66,7 @@ class TransactionCreateUpdateController extends GetxController {
         amount: double.parse(amountController.value.text),
         type: type.value,
         category: category.value,
-        createdAt: transactionDate.value,
+        date: transactionDate.value,
       );
       await repository.create(model);
       Get.offAndToNamed(Routes.transactionList);
@@ -81,7 +81,7 @@ class TransactionCreateUpdateController extends GetxController {
         amount: double.parse(amountController.text),
         type: type.value,
         category: category.value,
-        createdAt: transactionDate.value,
+        date: transactionDate.value,
       );
       await repository.edit(model);
       Get.offAndToNamed(Routes.transactionList);
@@ -93,7 +93,7 @@ class TransactionCreateUpdateController extends GetxController {
     amountController.text = Parser.doubleToString(item.value!.amount);
     category.value = item.value!.category;
     type.value = item.value!.type;
-    transactionDate.value = item.value!.createdAt;
+    transactionDate.value = item.value!.date;
     if (type.value == EnumTransactionType.income) {
       categories.value = EnumTransactionIncomeCategory.values;
     } else {

@@ -41,7 +41,7 @@ class TransactionCard extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                DateFormat.yMMMMd('en_US').format(item.createdAt),
+                DateFormat.yMMMMd('en_US').format(item.date),
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

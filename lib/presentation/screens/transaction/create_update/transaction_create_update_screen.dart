@@ -109,12 +109,6 @@ class TransactionCreateUpdateScreen
                       ),
                     ],
                   ),
-                  // CalendarDatePicker2(
-                  //   config: CalendarDatePicker2Config(),
-                  //   value: [
-                  //     DateTime.now(),
-                  //   ],
-                  // ),
                   const SizedBox(height: AppSizes.paddingMedium),
                   CustomTextFormField(
                     controller: controller.amountController,

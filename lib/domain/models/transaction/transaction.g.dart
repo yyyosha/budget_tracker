@@ -21,7 +21,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       amount: fields[1] as double,
       type: fields[3] as EnumTransactionType,
       category: fields[4] as TransactionCategory,
-      createdAt: fields[5] as DateTime,
+      date: fields[5] as DateTime,
       currency: fields[2] as String?,
     );
   }
@@ -41,7 +41,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       ..writeByte(4)
       ..write(obj.category)
       ..writeByte(5)
-      ..write(obj.createdAt);
+      ..write(obj.date);
   }
 
   @override

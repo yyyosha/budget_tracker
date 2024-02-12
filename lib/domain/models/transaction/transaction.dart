@@ -108,7 +108,7 @@ class TransactionModel extends HiveObject {
     required this.amount,
     required this.type,
     required this.category,
-    required this.createdAt,
+    required this.date,
     this.currency = "EUR",
   });
 
@@ -128,7 +128,7 @@ class TransactionModel extends HiveObject {
   final TransactionCategory category;
 
   @HiveField(5)
-  final DateTime createdAt;
+  final DateTime date;
 
   factory TransactionModel.createFake() {
     return TransactionModel(
@@ -136,7 +136,7 @@ class TransactionModel extends HiveObject {
       amount: 0,
       type: EnumTransactionType.income,
       category: TransactionCategory.values.first,
-      createdAt: DateTime.now(),
+      date: DateTime.now(),
     );
   }
 }
