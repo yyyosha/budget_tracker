@@ -150,20 +150,16 @@ class EnumTransactionExpenseCategoryAdapter
       case 0:
         return EnumTransactionExpenseCategory.food;
       case 1:
-        return EnumTransactionExpenseCategory.clothes;
+        return EnumTransactionExpenseCategory.internet;
       case 2:
-        return EnumTransactionExpenseCategory.electronics;
+        return EnumTransactionExpenseCategory.clothes;
       case 3:
-        return EnumTransactionExpenseCategory.education;
+        return EnumTransactionExpenseCategory.electronics;
       case 4:
         return EnumTransactionExpenseCategory.transport;
       case 5:
-        return EnumTransactionExpenseCategory.internet;
-      case 6:
-        return EnumTransactionExpenseCategory.transfer;
-      case 7:
         return EnumTransactionExpenseCategory.credit;
-      case 8:
+      case 6:
         return EnumTransactionExpenseCategory.bills;
       default:
         return EnumTransactionExpenseCategory.food;
@@ -176,29 +172,23 @@ class EnumTransactionExpenseCategoryAdapter
       case EnumTransactionExpenseCategory.food:
         writer.writeByte(0);
         break;
-      case EnumTransactionExpenseCategory.clothes:
+      case EnumTransactionExpenseCategory.internet:
         writer.writeByte(1);
         break;
-      case EnumTransactionExpenseCategory.electronics:
+      case EnumTransactionExpenseCategory.clothes:
         writer.writeByte(2);
         break;
-      case EnumTransactionExpenseCategory.education:
+      case EnumTransactionExpenseCategory.electronics:
         writer.writeByte(3);
         break;
       case EnumTransactionExpenseCategory.transport:
         writer.writeByte(4);
         break;
-      case EnumTransactionExpenseCategory.internet:
+      case EnumTransactionExpenseCategory.credit:
         writer.writeByte(5);
         break;
-      case EnumTransactionExpenseCategory.transfer:
-        writer.writeByte(6);
-        break;
-      case EnumTransactionExpenseCategory.credit:
-        writer.writeByte(7);
-        break;
       case EnumTransactionExpenseCategory.bills:
-        writer.writeByte(8);
+        writer.writeByte(6);
         break;
     }
   }

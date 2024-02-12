@@ -9,7 +9,8 @@ class StatisticsController extends GetxController {
 
   final ITransactionRepository repository;
 
-  final transactions = [].obs;
+  final RxList<TransactionModel> transactions =
+      [TransactionModel.createFake()].obs;
   final categories = TransactionCategory.values;
   final incomeTransactions = [].obs;
   final expenseTransactions = [].obs;

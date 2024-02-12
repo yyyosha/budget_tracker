@@ -1,5 +1,6 @@
 import 'package:budget_tracker/app/theme/colors.dart';
 import 'package:budget_tracker/app/theme/sizes.dart';
+import 'package:budget_tracker/app/utils/parser.dart';
 import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -57,16 +58,15 @@ class TransactionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Amount: ${double.parse(
-                        item.amount.toStringAsFixed(2),
-                      )} ${item.currency}",
+                      "Amount: "
+                      "${Parser.doubleToString(item.amount)} ${item.currency}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: AppSizes.paddingMedium),
                     Text(
-                      "Category: ${item.category.getString}",
+                      "Category: ${item.category.name}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                       ),

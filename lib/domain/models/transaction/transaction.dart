@@ -1,4 +1,6 @@
+import 'package:budget_tracker/app/theme/colors.dart';
 import 'package:budget_tracker/domain/models/model_hive_id.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 part 'transaction.g.dart';
@@ -9,7 +11,11 @@ sealed class TransactionCategory {
     ...EnumTransactionExpenseCategory.values,
   ];
 
-  String get getString;
+  String get name;
+
+  Color get color;
+
+  IconData get icon;
 }
 
 @HiveType(typeId: ModelHiveId.transactionType)
@@ -35,11 +41,21 @@ enum EnumTransactionIncomeCategory implements TransactionCategory {
   deposit;
 
   @override
-  String get getString => switch (this) {
+  String get name => switch (this) {
         salary => 'Salary',
         transfer => 'Transfer',
         deposit => 'Deposit',
       };
+
+  @override
+  Color get color => AppColors.incomeColor;
+
+  @override
+  IconData get icon => switch (this) {
+    salary => Icons.work_outline_rounded,
+    transfer => Icons.payments_outlined,
+    deposit => Icons.percent_outlined,
+  };
 }
 
 @HiveType(typeId: ModelHiveId.transactionExpenseCategory)
@@ -47,34 +63,42 @@ enum EnumTransactionExpenseCategory implements TransactionCategory {
   @HiveField(0)
   food,
   @HiveField(1)
-  clothes,
+  internet,
   @HiveField(2)
-  electronics,
+  clothes,
   @HiveField(3)
-  education,
+  electronics,
   @HiveField(4)
   transport,
   @HiveField(5)
-  internet,
-  @HiveField(6)
-  transfer,
-  @HiveField(7)
   credit,
-  @HiveField(8)
+  @HiveField(6)
   bills;
 
   @override
-  String get getString => switch (this) {
+  String get name => switch (this) {
         food => 'Food',
         clothes => 'Clothes',
         electronics => 'Electronics',
-        education => 'Education',
         transport => 'Transport',
         internet => 'Internet',
-        transfer => 'Transfer',
         credit => 'Credit',
         bills => 'Bills',
       };
+
+  @override
+  Color get color => AppColors.expenseColor;
+
+  @override
+  IconData get icon => switch (this) {
+    food => Icons.fastfood_outlined,
+    clothes => Icons.account_circle_outlined,
+    electronics => Icons.monitor_outlined,
+    transport => Icons.emoji_transportation,
+    internet => Icons.wifi,
+    credit => Icons.account_balance_outlined,
+    bills => Icons.list_alt_outlined,
+  };
 }
 
 @HiveType(typeId: ModelHiveId.transaction)

@@ -1,4 +1,5 @@
 import 'package:budget_tracker/app/router/app_router.dart';
+import 'package:budget_tracker/app/utils/parser.dart';
 import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:budget_tracker/domain/repositories/transaction_repository.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class TransactionCreateUpdateController extends GetxController {
 
   Future<void> _fillFields(String id) async {
     item.value = await repository.get(id);
-    amountController.text = item.value!.amount.toString();
+    amountController.text = Parser.doubleToString(item.value!.amount);
     category.value = item.value!.category;
     type.value = item.value!.type;
     if (type.value == EnumTransactionType.income) {

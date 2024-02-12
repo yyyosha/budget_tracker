@@ -72,7 +72,6 @@ class TransactionCreateUpdateScreen
                           ),
                         ),
                         DropdownButton(
-                          
                           value: controller.category.value,
                           onChanged: (item) => {
                             controller.category.value = item!,
@@ -82,7 +81,7 @@ class TransactionCreateUpdateScreen
                                 (e) => DropdownMenuItem(
                                     value: e,
                                     child: Text(
-                                      e.getString,
+                                      e.name,
                                     )),
                               )
                               .toList(),

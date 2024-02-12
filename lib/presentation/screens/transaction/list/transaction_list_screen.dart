@@ -21,28 +21,38 @@ class TransactionListScreen extends GetView<TransactionListController> {
           horizontal: AppSizes.paddingMedium,
         ),
         child: Obx(
-          () => ListView.separated(
-            itemCount: controller.transactions.length,
-            separatorBuilder: (_, index) => const SizedBox(
-              height: AppSizes.paddingMedium,
-            ),
-            itemBuilder: (_, index) {
-              return Obx(
-                () => TransactionCard(
-                    item: controller.transactions[index],
-                    onEdit: () => Get.offNamed(
-                      Routes.transactionCreateUpdate,
-                      arguments: {"id": controller.transactions[index].id},
+          () => controller.transactions.isEmpty
+              ? const Center(
+                  child: Text(
+                    "There are is not transactions",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
                     ),
-                    onDelete: () {
-                      controller.delete(
-                        controller.transactions[index].id,
-                      );
-                    },
                   ),
-              );
-            },
-          ),
+                )
+              : ListView.separated(
+                  itemCount: controller.transactions.length,
+                  separatorBuilder: (_, index) => const SizedBox(
+                    height: AppSizes.paddingMedium,
+                  ),
+                  itemBuilder: (_, index) {
+                    return Obx(
+                      () => TransactionCard(
+                        item: controller.transactions[index],
+                        onEdit: () => Get.offNamed(
+                          Routes.transactionCreateUpdate,
+                          arguments: {"id": controller.transactions[index].id},
+                        ),
+                        onDelete: () {
+                          controller.delete(
+                            controller.transactions[index].id,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
         ),
       ),
     );
