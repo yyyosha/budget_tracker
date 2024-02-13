@@ -19,40 +19,24 @@ class TransactionListScreen extends GetView<TransactionListController> {
     return Obx(
       () => ScaffoldWithNavbar(
         currentIndex: 0,
-        needRefresh: Get.parameters["id"] != null,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppSizes.paddingMedium,
-            horizontal: AppSizes.paddingMedium,
+        noData: controller.transactions.isEmpty,
+        body: ListView.separated(
+          itemCount: controller.transactions.length,
+          separatorBuilder: (_, index) => const SizedBox(
+            height: AppSizes.paddingMedium,
           ),
-          child: controller.transactions.isEmpty
-              ? const Center(
-                  child: Text(
-                    "There are is not transactions",
-                    style: TextStyle(
-                      fontSize: AppSizes.fontSizeLarge,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                )
-              : ListView.separated(
-                  itemCount: controller.transactions.length,
-                  separatorBuilder: (_, index) => const SizedBox(
-                    height: AppSizes.paddingMedium,
-                  ),
-                  itemBuilder: (_, index) {
-                    return TransactionCard(
-                      item: controller.transactions[index],
-                      onEdit: () => Get.toNamed(
-                        Routes.transactionCreateUpdate,
-                        parameters: {"id": controller.transactions[index].id},
-                      ),
-                      onDelete: () {
-                        controller.delete(controller.transactions[index].id);
-                      },
-                    );
-                  },
-                ),
+          itemBuilder: (_, index) {
+            return TransactionCard(
+              item: controller.transactions[index],
+              onEdit: () => Get.toNamed(
+                Routes.transactionCreateUpdate,
+                parameters: {"id": controller.transactions[index].id},
+              ),
+              onDelete: () {
+                controller.delete(controller.transactions[index].id);
+              },
+            );
+          },
         ),
       ),
     );

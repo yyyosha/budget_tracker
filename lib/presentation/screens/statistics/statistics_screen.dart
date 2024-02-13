@@ -22,25 +22,8 @@ class StatisticsScreen extends GetView<StatisticsController> {
     return Obx(
       () => ScaffoldWithNavbar(
         currentIndex: 2,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSizes.paddingMedium,
-              horizontal: AppSizes.paddingMedium,
-            ),
-            child: controller.transactions.isEmpty
-                ? const Center(
-                    child: Text(
-                      "There are is not transactions",
-                      style: TextStyle(
-                        fontSize: AppSizes.fontSizeLarge,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  )
-                : _renderCharts(),
-          ),
-        ),
+        noData: controller.transactions.isEmpty,
+        body: _renderCharts(),
       ),
     );
   }

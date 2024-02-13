@@ -35,10 +35,10 @@ class TransactionCreateUpdateScreen
                 () => Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _renderTypeSelect(),
-                        _renderCategorySelect(),
+                        const SizedBox(width: AppSizes.paddingLarge),
+                        Expanded(child: _renderCategorySelect()),
                       ],
                     ),
                     const SizedBox(height: AppSizes.paddingMedium),
@@ -97,6 +97,7 @@ class TransactionCreateUpdateScreen
 
   Widget _renderCategorySelect() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Text(
           "Category:",
@@ -104,7 +105,6 @@ class TransactionCreateUpdateScreen
             fontSize: AppSizes.fontSizeSmall,
           ),
         ),
-        const SizedBox(width: AppSizes.paddingSmall),
         DropdownButton(
           value: controller.category.value,
           onChanged: (item) => {
