@@ -59,7 +59,10 @@ class TransactionCard extends StatelessWidget {
                   children: [
                     Text(
                       "Amount: "
-                      "${Parser.doubleToString(item.amount)} ${item.currency}",
+                      "${Parser.doubleToString(
+                        item.amount,
+                        format: true,
+                      )} ${item.currency}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                       ),

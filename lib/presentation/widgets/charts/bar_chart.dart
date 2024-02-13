@@ -90,7 +90,7 @@ class AppBarChart extends StatelessWidget {
       touchTooltipData: BarTouchTooltipData(
         getTooltipItem: (group, i, data, y) => BarTooltipItem(
           "${TransactionCategory.values[i].name}\n"
-              "${Parser.doubleToString(data.toY)} EUR",
+              "${Parser.doubleToString(data.toY, format: true)} EUR",
           const TextStyle(),
         ),
         tooltipBgColor: Colors.white,

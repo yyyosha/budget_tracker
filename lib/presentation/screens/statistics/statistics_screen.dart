@@ -42,6 +42,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                           "Total",
                           style: TextStyle(
                             fontSize: AppSizes.fontSizeMedium,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         AppPieChart(
@@ -49,6 +50,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                             PieChartSectionData(
                               title: "${Parser.doubleToString(
                                 controller.incomeAmount.value,
+                                format: true,
                               )} EUR",
                               color: AppColors.incomeColor,
                               value: controller.incomeAmount.value,
@@ -56,6 +58,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                             PieChartSectionData(
                               title: "${Parser.doubleToString(
                                 controller.expenseAmount.value,
+                                format: true,
                               )} EUR",
                               color: AppColors.expenseColor,
                               value: controller.expenseAmount.value,
@@ -67,6 +70,7 @@ class StatisticsScreen extends GetView<StatisticsController> {
                           "By Categories",
                           style: TextStyle(
                             fontSize: AppSizes.fontSizeMedium,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: AppSizes.paddingLarge),
