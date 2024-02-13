@@ -14,7 +14,6 @@ class TransactionListScreen extends GetView<TransactionListController> {
   @override
   Widget build(BuildContext context) {
     if (Get.parameters["id"] != null) {
-      print("Get.parameters != null");
       controller.onInit();
     }
     return ScaffoldWithNavbar(
@@ -46,7 +45,7 @@ class TransactionListScreen extends GetView<TransactionListController> {
                         item: controller.transactions[index],
                         onEdit: () => Get.toNamed(
                           Routes.transactionCreateUpdate,
-                          arguments: {"id": controller.transactions[index].id},
+                          parameters: {"id": controller.transactions[index].id},
                         ),
                         onDelete: () {
                           controller.delete(

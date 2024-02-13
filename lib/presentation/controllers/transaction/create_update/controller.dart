@@ -25,8 +25,8 @@ class TransactionCreateUpdateController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    itemId.value = Get.arguments != null ? Get.arguments["id"] : "";
-    if (itemId.value != "") {
+    itemId.value = Get.parameters["id"] ?? "";
+    if (itemId.value.isNotEmpty) {
       _fillFields(itemId.value);
     } else {
       categories.value = EnumTransactionIncomeCategory.values;
