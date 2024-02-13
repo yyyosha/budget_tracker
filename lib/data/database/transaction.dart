@@ -19,10 +19,9 @@ class TransactionDatabase extends ICoreDatabase<TransactionModel> {
   }
 
   @override
-  Future<String> create(TransactionModel model) async {
+  Future<void> create(TransactionModel model) async {
     final box = await Hive.openBox<TransactionModel>(name);
     box.put(model.id, model);
-    return model.id;
   }
 
   @override

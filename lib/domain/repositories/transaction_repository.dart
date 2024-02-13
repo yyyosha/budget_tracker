@@ -5,7 +5,7 @@ abstract class ITransactionRepository {
 
   Future<TransactionModel?> get(String id);
 
-  Future<String> create(TransactionModel model);
+  Future<void> create(TransactionModel model);
 
   Future<void> edit(TransactionModel model);
 

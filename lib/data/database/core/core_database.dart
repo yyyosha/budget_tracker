@@ -5,7 +5,7 @@ abstract class ICoreDatabase<T extends Object> {
 
   Future<T?> get(String id);
 
-  Future<String> create(T model);
+  Future<void> create(T model);
 
   Future<void> edit(T model);
 

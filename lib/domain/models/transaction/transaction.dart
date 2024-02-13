@@ -25,10 +25,15 @@ enum EnumTransactionType {
   @HiveField(1)
   expense;
 
-  String get getString => switch (this) {
+  String get name => switch (this) {
         income => 'Income',
         expense => 'Expense',
       };
+
+  Color get color => switch (this) {
+    income => AppColors.incomeColor,
+    expense => AppColors.expenseColor,
+  };
 }
 
 @HiveType(typeId: ModelHiveId.transactionIncomeCategory)

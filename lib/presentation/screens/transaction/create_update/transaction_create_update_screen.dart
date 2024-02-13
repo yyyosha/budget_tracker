@@ -1,5 +1,4 @@
 import 'package:budget_tracker/app/router/app_router.dart';
-import 'package:budget_tracker/app/theme/colors.dart';
 import 'package:budget_tracker/app/theme/sizes.dart';
 import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:budget_tracker/presentation/controllers/transaction/create_update/controller.dart';
@@ -35,98 +34,113 @@ class TransactionCreateUpdateScreen
               horizontal: AppSizes.paddingMedium,
             ),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Obx(
-                    () => Row(
+              child: Obx(
+                () => Column(
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ToggleButtons(
-                          fillColor: Colors.transparent,
-                          splashColor: AppColors.incomeColor,
-                          selectedColor: AppColors.incomeColor,
-                          selectedBorderColor: AppColors.incomeColor,
-                          onPressed: controller.changeCategory,
-                          isSelected: EnumTransactionType.values
-                              .map((e) => e == controller.type.value)
-                              .toList(),
-                          children: EnumTransactionType.values
-                              .map(
-                                (e) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSizes.paddingCore,
-                                  ),
-                                  child: Text(
-                                    e.getString,
-                                    style: const TextStyle(
-                                      fontSize: AppSizes.fontSizeSmall,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
+                        _renderTypeSelect(),
                         const Text(
                           "Category:",
                           style: TextStyle(
                             fontSize: AppSizes.fontSizeSmall,
                           ),
                         ),
-                        DropdownButton(
-                          value: controller.category.value,
-                          onChanged: (item) => {
-                            controller.category.value = item!,
-                          },
-                          items: controller.categories
-                              .map(
-                                (e) => DropdownMenuItem(
-                                    value: e,
-                                    child: Text(
-                                      e.name,
-                                    )),
-                              )
-                              .toList(),
-                        ),
+                        _renderCategorySelect(),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: AppSizes.paddingMedium),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Date: ${DateFormat.yMMMMd('en_US').format(
-                          controller.transactionDate.value,
-                        )}",
-                        style: const TextStyle(
-                          fontSize: AppSizes.fontSizeSmall,
-                        ),
-                      ),
-                      OutlinedButton(
-                        onPressed: () => _showCalendar(context),
-                        child: const Text("Change Date"),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSizes.paddingMedium),
-                  CustomTextFormField(
-                    controller: controller.amountController,
-                    validationError: controller.amountControllerError.value,
-                    maxLines: 1,
-                    hintText: "Enter amount of funds",
-                  ),
-                  const SizedBox(height: AppSizes.paddingLarge),
-                  OutlinedButton(
-                    onPressed: controller.save,
-                    child: const Text("Save Transaction"),
-                  ),
-                ],
+                    const SizedBox(height: AppSizes.paddingMedium),
+                    _renderCalendarSelect(context),
+                    const SizedBox(height: AppSizes.paddingMedium),
+                    CustomTextFormField(
+                      controller: controller.amountController,
+                      validationError: controller.amountControllerError.value,
+                      maxLines: 1,
+                      hintText: "Enter amount of funds",
+                    ),
+                    const SizedBox(height: AppSizes.paddingLarge),
+                    OutlinedButton(
+                      onPressed: controller.save,
+                      child: const Text("Save"),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _renderTypeSelect() {
+    return ToggleButtons(
+      fillColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      selectedColor: controller.type.value.color,
+      selectedBorderColor: controller.type.value.color,
+      onPressed: controller.changeCategory,
+      isSelected: EnumTransactionType.values
+          .map((e) => e == controller.type.value)
+          .toList(),
+      children: EnumTransactionType.values
+          .map(
+            (e) => Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.paddingCore,
+              ),
+              child: Text(
+                e.name,
+                style: const TextStyle(
+                  fontSize: AppSizes.fontSizeSmall,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _renderCategorySelect() {
+    return DropdownButton(
+      value: controller.category.value,
+      onChanged: (item) => {
+        controller.category.value = item!,
+      },
+      items: controller.categories
+          .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
+          .toList(),
+    );
+  }
+
+  Widget _renderCalendarSelect(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          "Date: ${DateFormat.yMMMMd('en_US').format(
+            controller.transactionDate.value,
+          )}",
+          style: const TextStyle(
+            fontSize: AppSizes.fontSizeSmall,
+          ),
+        ),
+        OutlinedButton(
+          onPressed: () => _showCalendar(context),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(AppSizes.radius),
+                ),
+              ),
+            ),
+          ),
+          child: const Text("Change Date"),
+        ),
+      ],
     );
   }
 

@@ -6,12 +6,14 @@ class AppPieChart extends StatelessWidget {
   const AppPieChart({
     required this.data,
     this.height = 300.0,
-    this.centerRadius = 80.0,
+    this.centerRadius = 1.0,
+    this.sectionRadius = 130.0,
     super.key,
   });
 
   final double height;
   final double centerRadius;
+  final double sectionRadius;
   final List<PieChartSectionData> data;
 
   @override
@@ -34,7 +36,8 @@ class AppPieChart extends StatelessWidget {
                       (item) => PieChartSectionData(
                         title: item.title,
                         titleStyle: const TextStyle(color: Colors.white),
-                        titlePositionPercentageOffset: 0.5,
+                        titlePositionPercentageOffset: 0.55,
+                        radius: sectionRadius,
                         color: item.color,
                         value: item.value,
                       ),

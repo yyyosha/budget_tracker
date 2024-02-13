@@ -20,17 +20,7 @@ class AppBarChart extends StatelessWidget {
       child: BarChart(
         BarChartData(
           titlesData: _titleData(),
-          barTouchData: BarTouchData(
-            touchTooltipData: BarTouchTooltipData(
-              getTooltipItem: (group, i, data, y) => BarTooltipItem(
-                "${TransactionCategory.values[i].name}\n"
-                "${Parser.doubleToString(data.toY)} EUR",
-                const TextStyle(),
-              ),
-              tooltipBgColor: Colors.white,
-              tooltipBorder: const BorderSide(),
-            ),
-          ),
+          barTouchData: _barTouchData(),
           borderData: FlBorderData(
             border: const Border(
               top: BorderSide.none,
@@ -70,7 +60,6 @@ class AppBarChart extends StatelessWidget {
     return items
         .where((el) => el.category == category)
         .map((el) => el.amount)
-        .toList()
         .fold(0, (p, c) => p + c);
   }
 
@@ -85,7 +74,6 @@ class AppBarChart extends StatelessWidget {
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
           reservedSize: 36,
-          interval: 24,
           showTitles: true,
           getTitlesWidget: (val, meta) {
             return Icon(
@@ -93,6 +81,20 @@ class AppBarChart extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  BarTouchData _barTouchData() {
+    return BarTouchData(
+      touchTooltipData: BarTouchTooltipData(
+        getTooltipItem: (group, i, data, y) => BarTooltipItem(
+          "${TransactionCategory.values[i].name}\n"
+              "${Parser.doubleToString(data.toY)} EUR",
+          const TextStyle(),
+        ),
+        tooltipBgColor: Colors.white,
+        tooltipBorder: const BorderSide(),
       ),
     );
   }

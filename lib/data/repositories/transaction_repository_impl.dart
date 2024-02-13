@@ -20,8 +20,8 @@ class TransactionRepositoryImpl extends ITransactionRepository {
   }
 
   @override
-  Future<String> create(TransactionModel model) async {
-    return await database.create(model);
+  Future<void> create(TransactionModel model) async {
+    await database.create(model);
   }
 
   @override
