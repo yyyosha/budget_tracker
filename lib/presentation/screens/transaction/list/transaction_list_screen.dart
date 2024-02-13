@@ -14,17 +14,18 @@ class TransactionListScreen extends GetView<TransactionListController> {
   @override
   Widget build(BuildContext context) {
     if (Get.parameters["id"] != null) {
-      controller.onInit();
+      controller.onRefresh();
     }
-    return ScaffoldWithNavbar(
-      currentIndex: 0,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSizes.paddingMedium,
-          horizontal: AppSizes.paddingMedium,
-        ),
-        child: Obx(
-          () => controller.transactions.isEmpty
+    return Obx(
+      () => ScaffoldWithNavbar(
+        currentIndex: 0,
+        needRefresh: Get.parameters["id"] != null,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSizes.paddingMedium,
+            horizontal: AppSizes.paddingMedium,
+          ),
+          child: controller.transactions.isEmpty
               ? const Center(
                   child: Text(
                     "There are is not transactions",
@@ -40,19 +41,15 @@ class TransactionListScreen extends GetView<TransactionListController> {
                     height: AppSizes.paddingMedium,
                   ),
                   itemBuilder: (_, index) {
-                    return Obx(
-                      () => TransactionCard(
-                        item: controller.transactions[index],
-                        onEdit: () => Get.toNamed(
-                          Routes.transactionCreateUpdate,
-                          parameters: {"id": controller.transactions[index].id},
-                        ),
-                        onDelete: () {
-                          controller.delete(
-                            controller.transactions[index].id,
-                          );
-                        },
+                    return TransactionCard(
+                      item: controller.transactions[index],
+                      onEdit: () => Get.toNamed(
+                        Routes.transactionCreateUpdate,
+                        parameters: {"id": controller.transactions[index].id},
                       ),
+                      onDelete: () {
+                        controller.delete(controller.transactions[index].id);
+                      },
                     );
                   },
                 ),

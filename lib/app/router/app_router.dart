@@ -20,6 +20,7 @@ class AppRouter {
       name: Routes.statistics,
       page: () => const StatisticsScreen(),
       binding: StatisticsBinding(),
+      maintainState: false,
     ),
     GetPage(
       name: Routes.transactionCreateUpdate,

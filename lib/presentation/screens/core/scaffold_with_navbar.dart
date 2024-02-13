@@ -8,6 +8,7 @@ class ScaffoldWithNavbar extends StatelessWidget {
     required this.currentIndex,
     this.floatingActionButton,
     this.appBar,
+    this.needRefresh = false,
     super.key,
   });
 
@@ -15,6 +16,7 @@ class ScaffoldWithNavbar extends StatelessWidget {
   final Widget? floatingActionButton;
   final Widget body;
   final int currentIndex;
+  final bool needRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,10 @@ class ScaffoldWithNavbar extends StatelessWidget {
     return switch (index) {
       0 => Get.toNamed(Routes.transactionList),
       1 => Get.toNamed(Routes.transactionCreateUpdate),
-      2 => Get.toNamed(Routes.statistics),
+      2 => Get.toNamed(
+          Routes.statistics,
+          parameters: needRefresh ? {"id": "refreshId"} : {},
+        ),
       _ => null,
     };
   }

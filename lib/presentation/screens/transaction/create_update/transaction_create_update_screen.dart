@@ -46,6 +46,7 @@ class TransactionCreateUpdateScreen
                     const SizedBox(height: AppSizes.paddingMedium),
                     CustomTextFormField(
                       controller: controller.amountController,
+                      focus: controller.amountControllerFocusNode,
                       validationError: controller.amountControllerError.value,
                       maxLines: 1,
                       hintText: "Enter amount of funds",

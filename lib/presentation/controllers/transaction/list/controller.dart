@@ -28,9 +28,9 @@ class TransactionListController extends GetxController {
   }
 
   Future<void> onRefresh() async {
-    final initialItems = await search();
+    final items = await search();
     transactions.clear();
-    transactions.addAll(initialItems);
+    transactions.addAll(items);
     transactions.sort((a, b) => b.date.compareTo(a.date));
   }
 }

@@ -16,16 +16,19 @@ class StatisticsScreen extends GetView<StatisticsController> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithNavbar(
-      currentIndex: 2,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppSizes.paddingMedium,
-            horizontal: AppSizes.paddingMedium,
-          ),
-          child: Obx(
-            () => controller.transactions.isEmpty
+    if (Get.parameters["id"] != null) {
+      controller.onRefresh();
+    }
+    return Obx(
+      () => ScaffoldWithNavbar(
+        currentIndex: 2,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSizes.paddingMedium,
+              horizontal: AppSizes.paddingMedium,
+            ),
+            child: controller.transactions.isEmpty
                 ? const Center(
                     child: Text(
                       "There are is not transactions",

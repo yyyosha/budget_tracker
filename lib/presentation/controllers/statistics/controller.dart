@@ -9,8 +9,9 @@ class StatisticsController extends GetxController {
 
   final ITransactionRepository repository;
 
-  final RxList<TransactionModel> transactions =
-      [TransactionModel.createFake()].obs;
+  final RxList<TransactionModel> transactions = [
+    TransactionModel.createFake(),
+  ].obs;
   final categories = TransactionCategory.values;
   final incomeTransactions = [].obs;
   final expenseTransactions = [].obs;
@@ -19,7 +20,21 @@ class StatisticsController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    onRefresh();
+    super.onInit();
+  }
+
+  Future<List<TransactionModel>> search() async {
     final items = await repository.search();
+    return items;
+  }
+
+  Future<void> onRefresh() async {
+    final items = await search();
+    incomeTransactions.clear();
+    expenseTransactions.clear();
+    incomeAmount.value = 0.0;
+    expenseAmount.value = 0.0;
     transactions.value = items;
     for (var i = 0; i < items.length; i++) {
       if (items[i].type == EnumTransactionType.income) {
@@ -30,6 +45,5 @@ class StatisticsController extends GetxController {
         expenseAmount.value += items[i].amount;
       }
     }
-    super.onInit();
   }
 }

@@ -87,15 +87,18 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ],
         ),
-        if (validationError && controller.text.isEmpty)
-          Text(
-            validationText,
-            style: const TextStyle(
-              color: Colors.red,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        if (!validationError) const SizedBox(height: 20.0),
+        SizedBox(
+          height: 20.0,
+          child: validationError && controller.text.isEmpty
+              ? Text(
+                  validationText,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ),
       ],
     );
   }
