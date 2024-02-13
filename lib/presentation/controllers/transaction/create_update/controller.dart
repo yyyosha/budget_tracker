@@ -69,6 +69,7 @@ class TransactionCreateUpdateController extends GetxController {
         date: transactionDate.value,
       );
       await repository.create(model);
+      _resetField();
       Get.offAndToNamed(Routes.transactionList);
     }
   }
@@ -84,6 +85,7 @@ class TransactionCreateUpdateController extends GetxController {
         date: transactionDate.value,
       );
       await repository.edit(model);
+      _resetField();
       Get.offAndToNamed(Routes.transactionList);
     }
   }
@@ -99,5 +101,13 @@ class TransactionCreateUpdateController extends GetxController {
     } else {
       categories.value = EnumTransactionExpenseCategory.values;
     }
+  }
+
+  void _resetField() {
+    amountController.clear();
+    type.value = EnumTransactionType.income;
+    category.value = TransactionCategory.values.first;
+    transactionDate.value = DateTime.now();
+    categories.value = EnumTransactionIncomeCategory.values;
   }
 }
