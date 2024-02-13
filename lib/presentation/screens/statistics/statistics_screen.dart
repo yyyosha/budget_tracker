@@ -35,53 +35,57 @@ class StatisticsScreen extends GetView<StatisticsController> {
                       ),
                     ),
                   )
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Total",
-                          style: TextStyle(
-                            fontSize: AppSizes.fontSizeMedium,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        AppPieChart(
-                          data: [
-                            PieChartSectionData(
-                              title: "${Parser.doubleToString(
-                                controller.incomeAmount.value,
-                                format: true,
-                              )} EUR",
-                              color: AppColors.incomeColor,
-                              value: controller.incomeAmount.value,
-                            ),
-                            PieChartSectionData(
-                              title: "${Parser.doubleToString(
-                                controller.expenseAmount.value,
-                                format: true,
-                              )} EUR",
-                              color: AppColors.expenseColor,
-                              value: controller.expenseAmount.value,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: AppSizes.paddingLarge),
-                        const Text(
-                          "By Categories",
-                          style: TextStyle(
-                            fontSize: AppSizes.fontSizeMedium,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: AppSizes.paddingLarge),
-                        AppBarChart(
-                          items: controller.transactions,
-                        ),
-                      ],
-                    ),
-                  ),
+                : _renderCharts(),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _renderCharts() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const Text(
+            "Total",
+            style: TextStyle(
+              fontSize: AppSizes.fontSizeMedium,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          AppPieChart(
+            data: [
+              PieChartSectionData(
+                title: "${Parser.doubleToString(
+                  controller.incomeAmount.value,
+                  format: true,
+                )} EUR",
+                color: AppColors.incomeColor,
+                value: controller.incomeAmount.value,
+              ),
+              PieChartSectionData(
+                title: "${Parser.doubleToString(
+                  controller.expenseAmount.value,
+                  format: true,
+                )} EUR",
+                color: AppColors.expenseColor,
+                value: controller.expenseAmount.value,
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.paddingLarge),
+          const Text(
+            "By Categories",
+            style: TextStyle(
+              fontSize: AppSizes.fontSizeMedium,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: AppSizes.paddingLarge),
+          AppBarChart(
+            items: controller.transactions,
+          ),
+        ],
       ),
     );
   }

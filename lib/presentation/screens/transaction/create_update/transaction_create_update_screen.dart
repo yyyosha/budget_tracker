@@ -3,7 +3,7 @@ import 'package:budget_tracker/app/theme/sizes.dart';
 import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:budget_tracker/presentation/controllers/transaction/create_update/controller.dart';
 import 'package:budget_tracker/presentation/screens/core/app_bar.dart';
-import 'package:budget_tracker/presentation/widgets/text_field.dart';
+import 'package:budget_tracker/presentation/widgets/core/text_field.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,12 +41,6 @@ class TransactionCreateUpdateScreen
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _renderTypeSelect(),
-                        const Text(
-                          "Category:",
-                          style: TextStyle(
-                            fontSize: AppSizes.fontSizeSmall,
-                          ),
-                        ),
                         _renderCategorySelect(),
                       ],
                     ),
@@ -104,14 +98,25 @@ class TransactionCreateUpdateScreen
   }
 
   Widget _renderCategorySelect() {
-    return DropdownButton(
-      value: controller.category.value,
-      onChanged: (item) => {
-        controller.category.value = item!,
-      },
-      items: controller.categories
-          .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
-          .toList(),
+    return Row(
+      children: [
+        const Text(
+          "Category:",
+          style: TextStyle(
+            fontSize: AppSizes.fontSizeSmall,
+          ),
+        ),
+        const SizedBox(width: AppSizes.paddingSmall),
+        DropdownButton(
+          value: controller.category.value,
+          onChanged: (item) => {
+            controller.category.value = item!,
+          },
+          items: controller.categories
+              .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
+              .toList(),
+        ),
+      ],
     );
   }
 
