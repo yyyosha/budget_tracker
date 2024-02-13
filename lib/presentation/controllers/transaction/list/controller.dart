@@ -13,9 +13,7 @@ class TransactionListController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    final initialItems = await search();
-    transactions.addAll(initialItems);
-    transactions.sort((a, b) => b.date.compareTo(a.date));
+    onRefresh();
     super.onInit();
   }
 

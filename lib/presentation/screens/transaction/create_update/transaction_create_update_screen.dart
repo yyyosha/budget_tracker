@@ -1,4 +1,3 @@
-import 'package:budget_tracker/app/router/app_router.dart';
 import 'package:budget_tracker/app/theme/sizes.dart';
 import 'package:budget_tracker/domain/models/transaction/transaction.dart';
 import 'package:budget_tracker/presentation/controllers/transaction/create_update/controller.dart';
@@ -23,9 +22,7 @@ class TransactionCreateUpdateScreen
           title: controller.itemId.value == ""
               ? "Add transaction"
               : "Edit transaction",
-          onBack: () {
-            Get.offAndToNamed(Routes.transactionList);
-          },
+          onBack: Get.back,
         ),
         body: SafeArea(
           child: Padding(

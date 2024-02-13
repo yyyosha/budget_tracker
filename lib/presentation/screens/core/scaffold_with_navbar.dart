@@ -47,9 +47,9 @@ class ScaffoldWithNavbar extends StatelessWidget {
 
   _onSelectScreen(int index) {
     return switch (index) {
-      0 => Get.offAndToNamed(Routes.transactionList),
-      1 => Get.offAndToNamed(Routes.transactionCreateUpdate),
-      2 => Get.offAndToNamed(Routes.statistics),
+      0 => Get.toNamed(Routes.transactionList),
+      1 => Get.toNamed(Routes.transactionCreateUpdate),
+      2 => Get.toNamed(Routes.statistics),
       _ => null,
     };
   }

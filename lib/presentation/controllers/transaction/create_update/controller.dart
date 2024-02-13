@@ -61,8 +61,9 @@ class TransactionCreateUpdateController extends GetxController {
   Future<void> _onCreate() async {
     amountControllerError.value = amountController.value.text.isEmpty;
     if (amountController.value.text.isNotEmpty) {
+      final id = const Uuid().v4();
       final model = TransactionModel(
-        id: const Uuid().v4(),
+        id: id,
         amount: double.parse(amountController.value.text),
         type: type.value,
         category: category.value,
@@ -70,7 +71,7 @@ class TransactionCreateUpdateController extends GetxController {
       );
       await repository.create(model);
       _resetField();
-      Get.offAndToNamed(Routes.transactionList);
+      Get.offAndToNamed(Routes.transactionList, parameters: {"id": id});
     }
   }
 
@@ -86,7 +87,9 @@ class TransactionCreateUpdateController extends GetxController {
       );
       await repository.edit(model);
       _resetField();
-      Get.offAndToNamed(Routes.transactionList);
+      Get.offAndToNamed(Routes.transactionList, parameters: {
+        "id": item.value!.id,
+      });
     }
   }
 
